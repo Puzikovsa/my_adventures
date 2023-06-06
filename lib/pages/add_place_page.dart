@@ -11,6 +11,16 @@ class AddPlacePage extends StatelessWidget{
         centerTitle: true,
         title: const Text('Добавить место'),
       ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: const [
+          Expanded(child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(10),
+            ),
+          ))
+        ],
+      ),
     );
   }
 
