@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'add_place_page.dart';
+
 class PlaceListPage extends StatelessWidget{
   const PlaceListPage({super.key});
 
@@ -9,8 +11,11 @@ class PlaceListPage extends StatelessWidget{
       appBar: AppBar(
         title: const Text('Мои места'),
         actions: [
-          IconButton(onPressed: () {},
-              icon: const Icon(Icons.add)),
+          IconButton(onPressed: () {
+            Navigator.of(context).pushNamed(AddPlacePage.rout);
+          },
+              icon: const Icon(Icons.add),
+          ),
         ],
       ),
       body: const Center(
