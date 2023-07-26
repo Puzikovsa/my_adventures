@@ -1,12 +1,38 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:my_adventures/providers/my_places.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/image_input.dart';
 
-class AddPlacePage extends StatelessWidget {
+class AddPlacePage extends StatefulWidget {
   static const String rout = '/add_place';
-  final _titleController = TextEditingController();
 
-  AddPlacePage({super.key});
+  const AddPlacePage({super.key});
+
+  @override
+  State<AddPlacePage> createState() => _AddPlacePageState();
+}
+
+class _AddPlacePageState extends State<AddPlacePage> {
+  final _titleController = TextEditingController();
+  File? _pickedImage;
+
+  void _selectImage(File pickedImage){
+    _pickedImage = pickedImage;
+  }
+
+  _savePlace(){
+    if (_titleController.text.isEmpty || _pickedImage == null){
+      return;
+    }
+    Provider.of<MyPlaces>(context, listen: false).addPlace(
+      _titleController.text,
+      _pickedImage!,
+    );
+    Navigator.of(context).pop();
+}
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +55,9 @@ class AddPlacePage extends StatelessWidget {
                           labelText: 'Придумайте название'),
                       controller: _titleController,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 200,
-                      child: ImageInput(),
+                      child: ImageInput(onSelectImage: _selectImage),
                     ),
                   ],
                 ),
@@ -39,7 +65,7 @@ class AddPlacePage extends StatelessWidget {
             ),
           ),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: _savePlace,
             icon: const Icon(
               Icons.add,
               color: Colors.black,

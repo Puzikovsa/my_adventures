@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const PlaceListPage(),
       routes: {
-        AddPlacePage.rout: (context) => AddPlacePage(),
+        AddPlacePage.rout: (context) => const AddPlacePage(),
       },
     );
   }
