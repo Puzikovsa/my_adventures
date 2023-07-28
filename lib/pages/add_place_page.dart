@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:my_adventures/providers/my_places.dart';
 import 'package:provider/provider.dart';
-
 import '../widgets/image_input.dart';
 
 class AddPlacePage extends StatefulWidget {
@@ -52,7 +50,8 @@ class _AddPlacePageState extends State<AddPlacePage> {
                   children: [
                     TextField(
                       decoration: const InputDecoration(
-                          labelText: 'Придумайте название'),
+                          labelText: 'Придумайте название'
+                      ),
                       controller: _titleController,
                     ),
                     SizedBox(
@@ -65,7 +64,7 @@ class _AddPlacePageState extends State<AddPlacePage> {
             ),
           ),
           ElevatedButton.icon(
-            onPressed: _savePlace,
+            onPressed:_savePlace,
             icon: const Icon(
               Icons.add,
               color: Colors.black,

@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
-
 import '../models/place.dart';
 
 class MyPlaces with ChangeNotifier{
@@ -14,11 +12,10 @@ class MyPlaces with ChangeNotifier{
 
   void addPlace(String pickedTitle, File pickedImage) {
     final newPlace = Place(
-        DateTime.now().toString(),
-        pickedTitle,
-        null,
-        pickedImage!,
-    );
+        id: DateTime.now().toString(),
+        title: pickedTitle,
+        location: null,
+        image: pickedImage);
     _items.add(newPlace);
     notifyListeners();
   }
