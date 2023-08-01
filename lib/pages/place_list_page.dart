@@ -28,15 +28,19 @@ class PlaceListPage extends StatelessWidget {
                   itemCount: myPlaces.items.length,
                   itemBuilder: (context, index) => ListTile(
                     title: Text(myPlaces.items[index].title),
-                    onTap: () {},
+                    onTap: () {
+                     //TODO: go to detail page...
+                    },
                     leading: CircleAvatar(
                       backgroundImage: FileImage(myPlaces.items[index].image),
                     ),
                   ),
                 ),
-          child: const Text(
-            'Не найдено ни одного места\nДобавьте новое',
-            textAlign: TextAlign.center,
+          child: const Center(
+            child: Text(
+              'Не найдено ни одного места\nДобавьте новое',
+              textAlign: TextAlign.center,
+            ),
           ),
         ));
   }
