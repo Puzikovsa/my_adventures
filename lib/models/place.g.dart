@@ -20,7 +20,7 @@ class PlaceAdapter extends TypeAdapter<Place> {
       id: fields[0] as String,
       title: fields[1] as String,
       location: fields[2] as PlaceLocation?,
-      image: fields[3] as File,
+      image: File(fields[3] as String),
     );
   }
 
@@ -35,7 +35,7 @@ class PlaceAdapter extends TypeAdapter<Place> {
       ..writeByte(2)
       ..write(obj.location)
       ..writeByte(3)
-      ..write(obj.image);
+      ..write(obj.image.path);
   }
 
   @override
