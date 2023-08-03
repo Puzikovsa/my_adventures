@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:hive_flutter/hive_flutter.dart';
 
+part 'place.g.dart';
+
 @HiveType(typeId: 0)
 class Place {
   @HiveField(0)
