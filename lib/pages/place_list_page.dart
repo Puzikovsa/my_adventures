@@ -22,9 +22,13 @@ class PlaceListPage extends StatelessWidget {
         ],
       ),
       body: FutureBuilder(
-        future: Provider.of<MyPlaces>(context, listen: false).fetchAndSetData(),
+       future: Provider.of<MyPlaces>(context, listen: false).fetchAndSetData(),
         builder: (context, snapshot) {
-          return Consumer<MyPlaces>(
+          return snapshot.connectionState == ConnectionState.waiting ?
+          const Center(
+            child: CircularProgressIndicator(),
+          )
+          : Consumer<MyPlaces>(
             child: const Center(
               child: Text(
                 'Не найдено ни одного места\nДобавьте новое',
@@ -37,18 +41,18 @@ class PlaceListPage extends StatelessWidget {
                     itemCount: myPlaces.items.length,
                     itemBuilder: (context, index) => ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: FileImage(myPlaces.items[index].image),
+                        backgroundImage: FileImage(myPlaces.items[index].image,
+                        ),
                       ),
                       title: Text(myPlaces.items[index].title),
                       trailing: IconButton(
-                          icon: const Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          ),
-                          onPressed: () {
-                            Provider.of<MyPlaces>(context, listen: false)
-                                .deleteData(myPlaces.items[index]);
-                          }),
+                        icon: const Icon(Icons.delete,
+                        color: Colors.red,),
+                        onPressed: () {
+                          Provider.of<MyPlaces>(context,
+                          listen: false).deleteData(myPlaces.items[index]);
+                        },
+                      ),
                       onTap: () {
                         //TODO: go to detail page...
                       },

@@ -16,9 +16,10 @@ class MyPlaces with ChangeNotifier{
         id: DateTime.now().toString(),
         title: pickedTitle,
         location: null,
-        image: pickedImage);
+        image: pickedImage,
+    );
     _items.add(newPlace);
-    (await HiveHelper.getDB('user_places')).add(newPlace);
+    (await HiveHelper.getDB<Place>('user_places')).add(newPlace);
     notifyListeners();
   }
 
