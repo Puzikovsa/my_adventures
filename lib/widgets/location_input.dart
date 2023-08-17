@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LocationInput extends StatefulWidget{
+class LocationInput extends StatefulWidget {
   const LocationInput({super.key});
 
   @override
@@ -13,19 +13,37 @@ class _LocationInputState extends State<LocationInput> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children:[
+      children: [
         Container(
           height: 170,
           width: double.infinity,
           alignment: Alignment.center,
-          child: _previewImageUrl == null ? 
-          const Text('Местоположение не выбрано') :
-              Image.network(_previewImageUrl !,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
+          child: _previewImageUrl == null
+              ? const Text('Местоположение не выбрано')
+              : Image.network(
+                  _previewImageUrl!,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
         ),
-
+        Row(
+          children: [
+            Expanded(
+              child: TextButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.location_on),
+                label: const Text('Нынешнее местоположение'),
+              ),
+            ),
+            Expanded(
+              child: TextButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.map),
+                label: const Text('Выбрать на карте'),
+              ),
+            ),
+          ],
+        )
       ],
     );
   }
