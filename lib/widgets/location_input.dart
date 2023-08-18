@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+
+import '../core/location_helper.dart';
 
 class LocationInput extends StatefulWidget {
   const LocationInput({super.key});
@@ -10,19 +13,33 @@ class LocationInput extends StatefulWidget {
 class _LocationInputState extends State<LocationInput> {
   String? _previewImageUrl;
 
+  Future<void> _getPreviewImageUrl(
+    double latitude,
+    double longitude,
+  ) async {
+    setState(() {
+      _previewImageUrl = LocationHelper.generateLocationPreviewImage(
+          latitude: latitude, longitude: longitude);
+    });
+  }
+
+  Future<void> _getCurrentLocation() async {
+    final locationData = await Location().getLocation();
+    if (locationData.latitude == null || locationData.longitude == null) return;
+
+    _getPreviewImageUrl(locationData.latitude!, locationData.longitude!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          height: 300,
+          height: 200,
           width: double.infinity,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            border: Border.all(
-              width: 1,
-              color: Colors.grey
-            ),
+            border: Border.all(width: 1, color: Colors.grey),
           ),
           child: _previewImageUrl == null
               ? const Text('Местоположение не выбрано')
@@ -39,9 +56,10 @@ class _LocationInputState extends State<LocationInput> {
           children: [
             Expanded(
               child: TextButton.icon(
-                onPressed: () {},
+                onPressed: _getCurrentLocation,
                 icon: const Icon(Icons.location_on),
-                label: const Text('Мое местоположение',
+                label: const Text(
+                  'Мое местоположение',
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -50,8 +68,9 @@ class _LocationInputState extends State<LocationInput> {
               child: TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.map),
-                label: const Text('Выбрать на карте',
-                textAlign: TextAlign.center,
+                label: const Text(
+                  'Выбрать на карте',
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
