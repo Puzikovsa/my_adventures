@@ -15,9 +15,15 @@ class _LocationInputState extends State<LocationInput> {
     return Column(
       children: [
         Container(
-          height: 170,
+          height: 300,
           width: double.infinity,
           alignment: Alignment.center,
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1,
+              color: Colors.grey
+            ),
+          ),
           child: _previewImageUrl == null
               ? const Text('Местоположение не выбрано')
               : Image.network(
@@ -26,20 +32,27 @@ class _LocationInputState extends State<LocationInput> {
                   width: double.infinity,
                 ),
         ),
+        const SizedBox(
+          height: 5,
+        ),
         Row(
           children: [
             Expanded(
               child: TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.location_on),
-                label: const Text('Нынешнее местоположение'),
+                label: const Text('Мое местоположение',
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
             Expanded(
               child: TextButton.icon(
                 onPressed: () {},
                 icon: const Icon(Icons.map),
-                label: const Text('Выбрать на карте'),
+                label: const Text('Выбрать на карте',
+                textAlign: TextAlign.center,
+                ),
               ),
             ),
           ],
